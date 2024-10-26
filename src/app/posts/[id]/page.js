@@ -1,6 +1,15 @@
 import { getPostDetails } from '@/services/postApi';
 import React from 'react';
 
+export const generateMetadata = async({params}) => {
+    const {title, body} = await getPostDetails(params.id);
+    return {
+        title: `Post Details ${title}`,
+        description: body,
+        keywords: [body.split(0, 20), title]
+    }
+}
+
 const PostDetailsPage = async ({ params }) => {
     const {title, body} = await getPostDetails(params.id);
     return (

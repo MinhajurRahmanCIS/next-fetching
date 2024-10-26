@@ -1,7 +1,7 @@
 export default function Home() {
   return (
     <div className="h-screen">
-      Home
+      <span className="btn-custom">Home</span>
     </div>
   );
 }

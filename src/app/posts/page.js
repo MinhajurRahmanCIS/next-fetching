@@ -2,7 +2,11 @@ import PostsCard from '@/components/Posts/PostsCard/PostsCard';
 import { getPosts } from '@/services/postApi';
 import React from 'react';
 
-
+export const metadata = {
+  title: "Posts",
+  description: "Posts Page",
+  keywords: ["Posts", "Posts Page"]
+};
 
 const postPages = async () => {
   const postData = await getPosts();

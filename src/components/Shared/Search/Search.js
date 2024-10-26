@@ -1,5 +1,6 @@
 "use client";
 import { loadData } from '@/services/MealApi';
+import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 
@@ -47,7 +48,7 @@ const Search = () => {
             <div className="grid md:grid-cols-3 sm:grid-cols-1 gap-5">
                 {meals && meals.map((meal) => (
                     <div key={meal.idMeal} className="card bg-base-100 shadow-xl border">
-                        <img src={meal.strMealThumb} alt={meal.strMeal} className="w-full h-[300px] object-fill"/>
+                        <Image className="w-full h-[500px]"src={meal.strMealThumb} alt="meals" width={300} height={500}/>
                         <div className="card-body">
                             <h2 className="card-title">{meal.strMeal}</h2>
                             <p>{meal.strInstructions.substring(0, 100)}...</p>
