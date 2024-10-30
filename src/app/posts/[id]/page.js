@@ -6,7 +6,7 @@ export const generateMetadata = async({params}) => {
     return {
         title: `Post Details ${title}`,
         description: body,
-        keywords: [body.split(0, 20), title]
+        keyword: [body.split(0, 20), title]
     }
 }
 

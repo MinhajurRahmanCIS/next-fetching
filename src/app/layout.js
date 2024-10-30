@@ -1,7 +1,12 @@
+import { Inter, Roboto }from "next/font/google"
 import "./globals.css";
 import Navbar from "@/components/Shared/Navbar/Navbar";
 import Footer from "@/components/Shared/Footer/Footer";
+import AuthProvider from "@/services/AuthProvider";
 
+
+const roboto = Roboto({weight : ['300', '400', '900'],subsets: ["latin"]})
+const inter = Inter({weight : ['300', '400', '900'],subsets: ["latin"]})
 
 export const metadata = {
   title: {
@@ -14,10 +19,13 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body>
+      <body className={inter.className}>
+        <AuthProvider>
         <Navbar/>
         {children}
         <Footer/>
+        </AuthProvider>
+        
       </body>
     </html>
   );

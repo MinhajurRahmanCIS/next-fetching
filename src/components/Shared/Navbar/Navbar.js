@@ -1,7 +1,12 @@
+"use client"
+import { signOut, useSession } from 'next-auth/react';
+import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
 const Navbar = () => {
+    const session = useSession();
+    console.log(session);
     const menuPages = [
         {
             pageName: "Home",
@@ -15,6 +20,14 @@ const Navbar = () => {
             pageName: "Meals",
             path: '/meals'
         },
+        {
+            pageName: "Gallery",
+            path: '/gallery'
+        },
+        {
+            pageName: "Dashboard",
+            path: '/dashboard'
+        }
     ];
     return (
         <div className="navbar bg-base-200">
@@ -50,17 +63,43 @@ const Navbar = () => {
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1 gap-0.5">
-                {
-                            menuPages.map((menuPage, i) =>
-                                <li key={i}>
-                                    <Link href={menuPage.path}>{menuPage.pageName}</Link>
-                                </li>
-                            )
-                        }
+                    {
+                        menuPages.map((menuPage, i) =>
+                            <li key={i}>
+                                <Link href={menuPage.path}>{menuPage.pageName}</Link>
+                            </li>
+                        )
+                    }
                 </ul>
             </div>
             <div className="navbar-end">
-                <a className="btn">Button</a>
+                {
+                    session?.data?.user?.name &&
+                    <div className="flex items-center me-1 gap-0.5">
+                    <div className="avatar placeholder">
+                        <div className="avatar online">
+                            <div className="w-10 rounded-full">
+                                <Image src={session?.data?.user?.image} alt="Profile Pic" height={6} width={6}/>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="flex flex-col">
+                        <h4 className="font-bold">{session?.data?.user?.name}</h4>
+                        <small>{session?.data?.user?.type}</small>
+                    </div>
+                </div>
+                }
+
+                {
+                    session?.status === "authenticated" ?
+                        <button onClick={() => signOut()} className="btn btn-error">Logout</button>
+                        :
+                        <>
+                        <Link href="/api/auth/signin" className="btn btn-neutral">Login</Link>
+                        <Link href="/api/auth/signup" className="ms-0.5 btn btn-neutral">Signup</Link>
+                        </>
+                }
+
             </div>
         </div>
     );

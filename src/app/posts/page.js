@@ -1,5 +1,6 @@
 import PostsCard from '@/components/Posts/PostsCard/PostsCard';
 import { getPosts } from '@/services/postApi';
+import { redirect } from 'next/navigation';
 import React from 'react';
 
 export const metadata = {
@@ -10,6 +11,9 @@ export const metadata = {
 
 const postPages = async () => {
   const postData = await getPosts();
+  // if(postData){
+  //   redirect('/meals');
+  // }
   return (
     <div className="px-10">
       <h6 className="text-2xl text-center font-bold py-10">All Posts</h6>
